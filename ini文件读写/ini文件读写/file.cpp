@@ -2,12 +2,16 @@
 #include<iostream>
 #include "File.h"
 
-
+/*
+* \brief构造函数
+*/
 File::File()
 {
 }
 
-
+/*
+* \brief析构函数
+*/
 File::~File()
 {
 }
@@ -19,21 +23,13 @@ File::~File()
 */
 void File::getFileString()
 {
-	char c;
-	std::cout << "请输入希望查询的Section" << std::endl;
-	gets(_Section);
-
-	std::cout << "请输入希望查询的Key" << std::endl;
-	std::cin >> _Key;		
-	getchar();
 	GetPrivateProfileString(
-		(LPCSTR)_Section, 
-		(LPCSTR)_Key, 
-		"No such Key or Section\n", 
-		(LPSTR)_ReturnedString, 
-		sizeof(_ReturnedString), 
+		(LPCSTR)_Section,
+		(LPCSTR)_Key,
+		"No such Key or Section\n",
+		(LPSTR)_Value,
+		sizeof(_Value),
 		(LPCSTR)_FileName);
-	std::cout << "查询到的字符为:" << _ReturnedString << std::endl;
 }
 
 
@@ -43,19 +39,65 @@ void File::getFileString()
 */
 void File::writeFileString()
 {
-	char c;
-	std::cout << "请输入希望写入的Section" << std::endl;
-	gets(_Section);
-	std::cout << "请输入希望写入的Key" << std::endl;
-	std::cin >> _Key;
-	getchar();
-	std::cout << "请输入希望写入的字符串" << std::endl;
-	gets(_WantedString);
 	WritePrivateProfileString(
 		(LPCSTR)_Section,
 		(LPCSTR)_Key,
-		(LPSTR)_WantedString,
+		(LPSTR)_Value,
 		(LPCSTR)_FileName
-	);
-	std::cout << "Finished" << std::endl;
+		);
+}
+
+/*
+*	\brief写入FileName变量
+*
+*  \pram 传入源数组
+*/
+
+void File::inputFileName(char* c)
+{
+	strcpy(_FileName, c);
+}
+
+/*
+*	\brief写入Section变量
+*
+*  \pram 传入源数组
+*/
+
+void File::inputSection(char* c)
+{
+	strcpy(_Section, c);
+}
+
+/*
+*	\brief写入Key
+*
+*  \pram 传入源数组
+*/
+
+void File::inputKey(char* c)
+{
+	strcpy(_Key, c);
+}
+
+/*
+*	\brief写入Value
+*
+*  \pram 传入源数组
+*/
+
+void File::inputValue(char* c)
+{
+	strcpy(_Value, c);
+}
+
+/*
+*	\brief传出Value
+*
+*  \pram 传入源数组
+*/
+
+void File::outputValue(char* c)
+{
+	strcpy(c, _Value);
 }
