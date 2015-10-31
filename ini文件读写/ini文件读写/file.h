@@ -34,35 +34,48 @@ public:
 	*
 	* \pram 源数组
 	*/
-	void inputSection(char* c);
+	void inputSection(char* c,int len);
 	/*
 	* \brief传入Key
 	*
 	* \pram 源数组
 	*/
-	void inputKey(char* c);
+	void inputKey(char* c, int len);
 	/*
 	* \brief传入Value
 	*
 	* \pram 源数组
 	*/
-	void inputValue(char* c);
+	void inputValue(char* c, int len);
 	/*
 	* \brief传入FileName
 	*
 	* \pram 源数组
 	*/
-	void inputFileName(char* c);
+	void inputFileName(char* c, int len);
 	/*
 	* \brief传出Value
 	*
 	* \pram 源数组
 	*/
-	void outputValue(char* c);
+	void outputValue(char* c, int len);
+
+	/*
+	* \brief释放内存
+	*/
+	void intdeleted();
+	/*
+	* \brief释放内存
+	*/
+	void outdeleted();
+	/*
+	* \brief释放内存
+	*/
+	void namedeleted();
 
 private:
-	char _FileName[100];     /**<文件名*/
-	char _Section[100];         /**<Section*/
-	char _Key[100];                /**<Key*/
-	char _Value[1000];          /**<返回或写入的Value*/
+	char *_FileName;     /**<文件名*/
+	char *_Section;         /**<Section*/
+	char *_Key;                /**<Key*/
+	char *_Value;          /**<返回或写入的Value*/
 };
