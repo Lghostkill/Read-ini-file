@@ -4,22 +4,14 @@
 
 int main()
 {
-	//char section[120] = { " SECTION 1 " };
-	//char test[10] = { "XPos" };
-	//char default[100] = { "file open failed\n" };
-	//char ip[100] = { "e://example.ini" };
-	//char retu[10];
-	//std::cin >> test;
-	//GetPrivateProfileString((LPCSTR)section, (LPCSTR)test, "Error", (LPSTR)retu, sizeof(retu), (LPCSTR)ip);
-	//std::cout << retu << std::endl;
-
-
 
 	File file;
 	int choice;
 	char c;
+	char temp[100];   
 	std::cout << "请输入.ini文件地址" << std::endl << "例如：e://example.ini" << std::endl;
-	std::cin >> file._FileName;
+	std::cin >> temp;
+	file.inputFileName(temp);
 	getchar();
 	while (1)
 	{
@@ -27,9 +19,33 @@ int main()
 		std::cin >> choice;
 		getchar();
 		if (1 == choice)
+		{
+			std::cout << "请输入希望写入的Section" << std::endl;
+			gets(temp);
+			file.inputSection(temp);
+			std::cout << "请输入希望写入的Key" << std::endl;
+			gets(temp);
+			file.inputKey(temp);
+			std::cout << "请输入希望写入的Value" << std::endl;
+			gets(temp);
+			file.inputValue(temp);
 			file.writeFileString();
+			std::cout << "Finished" << std::endl;
+		}
 		if (2 == choice)
+		{
+			std::cout << "请输入希望查询的Section" << std::endl;
+			gets(temp);
+			file.inputSection(temp);
+			std::cout << "请输入希望查询的Key" << std::endl;
+			gets(temp);
+			file.inputKey(temp);
+
 			file.getFileString();
+			file.outputValue(temp);
+			std::cout << temp << std::endl;
+			std::cout << "Finished" << std::endl;
+		}
 		if (0 == choice)
 			return 0;
 	}
