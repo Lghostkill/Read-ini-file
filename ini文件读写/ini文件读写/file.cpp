@@ -1,5 +1,6 @@
 #include<Windows.h>
 #include<iostream>
+#include<math.h>
 #include "File.h"
 
 /*
@@ -27,9 +28,9 @@ void File::getFileString()
 	GetPrivateProfileString(
 		(LPCSTR)_Section,
 		(LPCSTR)_Key,
-		"No such Key or Section\n",
+		"No such Key or Section",
 		(LPSTR)_Value,
-		sizeof(_Value),
+		sizeof(char*)*10000,
 		(LPCSTR)_FileName);
 }
 
@@ -102,8 +103,10 @@ void File::inputValue(char* c, int len)
 *  \pram 传入源数组
 */
 
-void File::outputValue(char* c, int len)
+void File::outPutValue(char* c)
 {
+	int len = strlen(_Value);
+	//c = new char[sizeof(_Value)*(len + 1)];
 	strcpy(c, _Value);
 }
 
@@ -111,7 +114,7 @@ void File::outputValue(char* c, int len)
 /*
 * \brief释放内存
 */
-void File::intdeleted()
+void File::intDeleted()
 {
 	delete[]_Section;
 	delete[]_Key;
@@ -123,13 +126,56 @@ void File::intdeleted()
 /*
 * \brief释放内存
 */
-void File::outdeleted()
+void File::outDeleted()
 {
 	delete[]_Section;
 	delete[]_Key;
 }
 
-void File::namedeleted()
+/*
+* \brief释放内存
+*/
+void File::nameDeleted()
 {
 	delete[]_FileName;
+}
+
+/*
+* \brief转换Value到整型
+*
+* \pram 源数组
+*/
+int File::fromStrToInt(char* c)
+{
+	int sum = atoi(c);
+	return sum;
+}
+/*
+* \brief转换Value到整型
+*
+* \pram 源数组
+*/
+float File::fromStrToFloat(char* c)
+{
+	int len, i, flag, p;
+	float sum = 0;
+	len = strlen(c);
+	flag = 0;
+	p = -1;
+	for (i = 0; i < len; i++)
+	{
+		if (c[i] == '.')
+		{
+			flag = 1;
+			continue;
+		}
+		if (0 == flag)
+			sum = sum * 10 + (c[i] - '0');
+		if (1 == flag)
+		{
+			sum = sum + (c[i] - '0')*pow(10.0, p);
+			p -= 1;
+		}
+	}
+	return sum;
 }

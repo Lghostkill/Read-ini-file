@@ -58,20 +58,32 @@ public:
 	*
 	* \pram 源数组
 	*/
-	void outputValue(char* c, int len);
+void outPutValue(char* c);
 
 	/*
 	* \brief释放内存
 	*/
-	void intdeleted();
+	void intDeleted();
 	/*
 	* \brief释放内存
 	*/
-	void outdeleted();
+	void outDeleted();
 	/*
 	* \brief释放内存
 	*/
-	void namedeleted();
+	void nameDeleted();
+	/*
+	* \brief转换Value到整型
+	*
+	* \pram 源数组
+	*/
+	int fromStrToInt(char* c);
+	/*
+	* \brief转换Value到整型
+	*
+	* \pram 源数组
+	*/
+	float fromStrToFloat(char* c);
 
 private:
 	char *_FileName;     /**<文件名*/
