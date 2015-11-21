@@ -1,9 +1,12 @@
-/*
-* File:   ini.h
-* Author: tsxw24@gmail.com
+/**********************************************************************
 *
-* Created on 2013年3月18日, 下午2:51
-*/
+*	@file		file.cpp
+*	@brief		对读取ini文件的实现
+*
+*	Date         Name              Description
+*	11/21/15	  LGX		Creation.
+*
+*********************************************************************/
 
 #ifndef INI_H
 #define	INI_H
@@ -16,13 +19,46 @@ using namespace std;
 
 
 class Ini{
+
 public:
+	/*
+	* \brief构造函数
+	*/
+	Ini();
+
+
+	/*
+	* \brief析构函数
+	*/
+	~Ini();
+
+
+	/*
+	* \brief 传入文件名
+	*
+	* \pram 文件名
+	*/
 	Ini(string ini_file);
+
+
+	/*
+	* \brief获取Value
+	*
+	* \pram Sectionname.Key
+	*/
 	string get(string path);
+
+
+	/*
+	* \brief出错输出字符代码
+	*
+	*/
 	short int errCode();
+
+
 private:
-	short int err_code;
-	boost::property_tree::ptree m_pt;
+	short int err_code;  /**<错误判断*/
+	boost::property_tree::ptree m_pt;/**<存储文件容器*/
 };
 
 #endif	/* INI_H */
