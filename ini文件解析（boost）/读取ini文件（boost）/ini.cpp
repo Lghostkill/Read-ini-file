@@ -24,12 +24,12 @@ Ini::~Ini()
 */
 Ini::Ini(string ini_file)
 {
-	if (ini_file!="" )
+	try
 	{
 		this->err_code = 0;
 		boost::property_tree::ini_parser::read_ini(ini_file, this->m_pt);
 	}
-	else 
+	catch (std::exception)
 	{
 		this->err_code = 1;
 	}
@@ -51,14 +51,62 @@ short Ini::errCode()
 *
 * \pram Sectionname.Key
 */
-string Ini::get(string path)
+string Ini::getstring(string path)
 {
-	if (this->err_code == 0) 
+	try
 	{
-		return this->m_pt.get<string>(path);
+		if (this->err_code == 0)
+		{
+			return this->m_pt.get<string>(path);
+		}
+		else
+		{
+			return "Filename error.";
+		}
 	}
-	else 
+	catch (std::exception)
 	{
-		return "文件不存在";
+		return "Scetionname or Keyname error.";
+	}
+}
+
+int Ini::getint(string path,int *f)
+{
+	try
+	{
+		if (this->err_code == 0)
+		{
+			*f = 0;
+			return this->m_pt.get<int>(path);
+		}
+		else
+		{
+			*f=1;
+		}
+	}
+	catch (std::exception)
+	{
+		*f=2;
+	}
+}
+
+
+float Ini::getfloat(string path, int *f)
+{
+	try
+	{
+		if (this->err_code == 0)
+		{
+			*f = 0;
+			return this->m_pt.get<float>(path);
+		}
+		else
+		{
+			*f = 1;
+		}
+	}
+	catch (std::exception)
+	{
+		*f = 2;
 	}
 }

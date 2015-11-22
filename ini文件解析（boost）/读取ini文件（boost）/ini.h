@@ -46,7 +46,11 @@ public:
 	*
 	* \pram Sectionname.Key
 	*/
-	string get(string path);
+	string getstring(string path);
+
+	int getint(string path,int *f);
+
+	float getfloat(string path,int *f);
 
 
 	/*
@@ -59,6 +63,7 @@ public:
 private:
 	short int err_code;  /**<´íÎóÅĞ¶Ï*/
 	boost::property_tree::ptree m_pt;/**<´æ´¢ÎÄ¼şÈİÆ÷*/
+	int flag;/**<´íÎóÅĞ¶Ï*/
 };
 
 #endif	/* INI_H */
